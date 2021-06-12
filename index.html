@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/img/logo.svg" type="image/png">
+    <title>Windows 10</title>
+</head>
+<body>
+
+    <div class="wrapper" onclick="closeMenu()">
+        <!-- <h1>Windows 10 Start Menu</h1> -->
+    </div>
+    
+    <div class="start-menu" id="start-menu"></div>
+    <div class="taskbar">
+        <div class="logo-wrapper" title="Start" onclick="toggleMenu()">
+            <div class="logo">
+            </div>
+        </div>
+        <div class="search">
+            <span class="InputAddOn-item"></span>
+            <input class="InputAddOn-field" placeholder="Type here to search">
+        </div>
+        <div class="left-items">
+            <div class="icon-item cortana" title="Talk to Cortana">
+                <img src="assets/img/cortana.png" />
+            </div>
+            <div class="icon-item" title="Google Chrome" onclick="openWindow('chrome')">
+                <img src="assets/img/chrome.png" />
+            </div>
+            <div class="icon-item" title="Firefox">
+                <img src="assets/img/firefox.png" />
+            </div>
+        </div>
+        <div class="right-items">
+            <div class="icon-item" title="Show hidden icons">
+                <img src="assets/img/chevron.png" />
+            </div>
+            <div class="icon-item" title="Linksys R2S&#010;Internet access">
+                <img src="assets/img/wifi.png" />
+            </div>
+            <div class="icon-item" title="Speakers: 34%">
+                <img src="assets/img/volume.png" />
+            </div>
+            <div id="date-time" class="date-time" title=""></div>
+            <div class="charm icon-item" title="No new notifications">
+                <img src="assets/img/chatbox.png" />
+            </div>
+            <div class="show-desktop"></div>
+        </div>
+    </div>
+
+    
+</body>
+
+<script src="assets/js/index.js"></script>
+</html>
