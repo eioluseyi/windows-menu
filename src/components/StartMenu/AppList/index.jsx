@@ -1,3 +1,5 @@
+import { AppListCategory } from "./AppListCategory";
+
 const AppList = (props) => {
 	const categorylist = [
 		{
@@ -119,15 +121,7 @@ const AppList = (props) => {
 	return (
 		<div {...props} className="app-list">
 			{categorylist.map((cat) => (
-				// <>
-					/* <div className="category mouse-hover" key={cat.name}>{cat.name}</div> */
-					cat.children.map((app) => (
-						<div className="application mouse-hover" key={app.name}>
-							<img src={app.imgSrc} alt={`${app.name} icon`} />
-							{` ${app.name}`}
-						</div>
-					))
-				// </>
+				<AppListCategory category={cat} />
 			))}
 		</div>
 	);

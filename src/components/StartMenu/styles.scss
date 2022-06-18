@@ -1,3 +1,18 @@
+// @mixin transform($property) {
+//   -webkit-transform: $property;
+//   -ms-transform: $property;
+//   transform: $property;
+// }
+// .box { @include transform(rotate(30deg)); }
+
+.mouse-effect__wrapper {
+  --before-bg-x: 0;
+  --before-bg-y: 0;
+  --pinned-app-height: 100px;
+  --pinned-app-width: 100px;
+  --glow-size-multiplier: 2.5;
+}
+
 .start-menu {
   height: 0px;
   width: 648px;
@@ -144,7 +159,7 @@
       overflow: overlay;
     }
   }
-
+  
   .app-list {
     text-align: left;
     padding-top: 7px;
@@ -197,13 +212,23 @@
       }
     }
   }
+  
+  .pinned-app__top-bg {
+    position: absolute;
+    height: calc(100% - 4px);
+    width: calc(100% - 4px);
+    background-color: #ee6600;
+    transform: translate(2px, 2px);
+  }
 
-  .application {
-    --before-bg-x: 0;
-    --before-bg-y: 0;
-    --pinned-app-height: 100px;
-    --pinned-app-width: 100px;
-    --glow-size-multiplier: 2.5;
+  .pinned-app__overlay {
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 50%);
+    background-position-x: calc(var(--before-bg-x) - (var(--pinned-app-width) * var(--glow-size-multiplier)/(2)));
+    background-position-y: calc(var(--before-bg-y) - (var(--pinned-app-height) * var(--glow-size-multiplier)/(2)));
+    background-repeat: no-repeat;
+    background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
   }
 
   .pinned-apps {
@@ -211,7 +236,7 @@
     flex-wrap: wrap;
     place-content: flex-start;
 
-    .application {
+    .mouse-effect__wrapper {
       width: var(--pinned-app-width);
       max-width: var(--pinned-app-width);
       min-width: var(--pinned-app-width);
