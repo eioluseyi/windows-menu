@@ -5,13 +5,7 @@ const PinnedApp = () => {
 	const app = useRef(null);
 	const cssVariables = useCssVariables({ app });
 
-	return (
-		<div
-			ref={app}
-			style={cssVariables}
-			className="pinned-app mouse-effect__wrapper">
-		</div>
-	);
+	return <div ref={app} style={cssVariables} className="pinned-app"></div>;
 };
 
 export { PinnedApp };

@@ -1,12 +1,63 @@
-.mouse-effect__wrapper {
+:root {
+  --inspect: 1px dashed orange;
+
   --before-bg-x: 0;
   --before-bg-y: 0;
+
   --pinned-app-height: 100px;
   --pinned-app-width: 100px;
-  --glow-size-multiplier: 2.5;
   --pinned-app-color: #444444;
 
-  
+  --glow-size-multiplier: 2.5;
+}
+
+// .mouse-effect__wrapper {
+//   --before-bg-x: 0;
+//   --before-bg-y: 0;
+//   --pinned-app-height: 100px;
+//   --pinned-app-width: 100px;
+//   --glow-size-multiplier: 2.5;
+//   --pinned-app-color: #444444;
+
+//   &::before {
+//     content: "";
+//     position: absolute;
+
+//     height: calc(100% - 4px);
+//     width: calc(100% - 4px);
+
+//     transform: translate(2px, 2px);
+//     z-index: 1;
+//   }
+
+//   &::after {
+//     content: "";
+//     position: absolute;
+
+//     width: 100%;
+//     aspect-ratio: 1;
+
+//     background: radial-gradient(rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 50%);
+//     background-position-x: calc(var(--before-bg-x) - (var(--pinned-app-width) * var(--glow-size-multiplier)/(2)));
+//     background-position-y: calc(var(--before-bg-y) - (var(--pinned-app-height) * var(--glow-size-multiplier)/(2)));
+//     background-repeat: no-repeat;
+//     background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
+//   }
+
+//   &:hover {
+//     &::after {
+//       box-sizing: border-box;
+//       border: 2px solid rgba(255, 255, 255, .6);
+//       background-image: radial-gradient(rgba(255, 255, 255, .4) -75%, rgba(255, 255, 255, 0) 75%);
+//     }
+
+//     &::before {
+//       background-color: transparent;
+//     }
+//   }
+// }
+
+@mixin mouse-effect__wrapper($width, $height) {
   &::before {
     content: "";
     position: absolute;
@@ -18,22 +69,22 @@
     z-index: 1;
   }
 
-  &::after {
+  &::after { // border
     content: "";
     position: absolute;
 
     width: 100%;
     aspect-ratio: 1;
 
-    background: radial-gradient(rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 50%);
-    background-position-x: calc(var(--before-bg-x) - (var(--pinned-app-width) * var(--glow-size-multiplier)/(2)));
-    background-position-y: calc(var(--before-bg-y) - (var(--pinned-app-height) * var(--glow-size-multiplier)/(2)));
+    background: radial-gradient(rgba(255, 255, 255, .4) 0%, rgba(255, 255, 255, 0) 40%);
+    background-position-x: calc(var(--before-bg-x) - (#{$width} * var(--glow-size-multiplier)/(2)));
+    background-position-y: calc(var(--before-bg-y) - (#{$height} * var(--glow-size-multiplier)/(2)));
     background-repeat: no-repeat;
     background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
   }
 
   &:hover {
-    &::after {
+    &::after { // background
       box-sizing: border-box;
       border: 2px solid rgba(255, 255, 255, .6);
       background-image: radial-gradient(rgba(255, 255, 255, .4) -75%, rgba(255, 255, 255, 0) 75%);
@@ -45,9 +96,6 @@
   }
 }
 
-:root {
-  --inspect: 1px dashed orange;
-}
 
 .start-menu {
   --start-menu-height: 639px;
@@ -216,8 +264,6 @@
 
 .pinned-app {
   width: var(--pinned-app-width);
-  max-width: var(--pinned-app-width);
-  min-width: var(--pinned-app-width);
   height: var(--pinned-app-height);
 
   position: relative;
@@ -234,4 +280,6 @@
       border: 2px solid rgba(255, 255, 255, .6);
     }
   }
+
+  @include mouse-effect__wrapper(var(--pinned-app-width), var(--pinned-app-height));
 }

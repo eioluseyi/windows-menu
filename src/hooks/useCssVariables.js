@@ -10,7 +10,7 @@ const useCssVariables = ({ app }) => {
 
 	useEffect(
 		() => setCoordinates(app.current.getBoundingClientRect().toJSON()),
-		[mousePosition, scrolling]
+		[mousePosition, scrolling, app]
 	);
 
 	return {
