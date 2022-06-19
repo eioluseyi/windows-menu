@@ -10,8 +10,6 @@ const PinnedApp = () => {
 			ref={app}
 			style={cssVariables}
 			className="pinned-app mouse-effect__wrapper">
-			<div className="pinned-app__top-bg mouse-effect__top-bg"></div>
-			<div className="pinned-app__overlay mouse-effect__overlay"></div>
 		</div>
 	);
 };

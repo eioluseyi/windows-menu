@@ -10,12 +10,12 @@ const ActionButton = (props) => {
 const SideBar = () => {
 	return (
 		<div className="side-bar">
-			<ActionButton name="start" />
-			<ActionButton name="user" />
-			<ActionButton name="documents" />
-			<ActionButton name="pictures" />
-			<ActionButton name="settings" />
-			<ActionButton name="power" />
+			<ActionButton name="START" />
+			<ActionButton name="USER" />
+			<ActionButton name="Documents" />
+			<ActionButton name="Pictures" />
+			<ActionButton name="Settings" />
+			<ActionButton name="Power" />
 		</div>
 	);
 };

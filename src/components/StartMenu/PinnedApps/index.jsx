@@ -11,8 +11,8 @@ const PinnedApps = () => {
 	return (
 		<div className="pinned-apps" onScroll={(e) => setScrollObj(e)}>
 			<scrollContext.Provider value={scrollObj}>
-				{pineApple.map(() => (
-					<PinnedApp />
+				{pineApple.map((_, idx) => (
+					<PinnedApp key={idx} />
 				))}
 			</scrollContext.Provider>
 		</div>

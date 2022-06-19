@@ -120,8 +120,8 @@ const AppList = (props) => {
 
 	return (
 		<div {...props} className="app-list">
-			{categorylist.map((cat) => (
-				<AppListCategory category={cat} />
+			{categorylist.map((categoryData) => (
+				<AppListCategory category={categoryData} />
 			))}
 		</div>
 	);
