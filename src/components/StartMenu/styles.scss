@@ -1,9 +1,6 @@
 :root {
   --inspect: 1px dashed orange;
 
-  --before-bg-x: 0;
-  --before-bg-y: 0;
-
   --pinned-app-height: 100px;
   --pinned-app-width: 100px;
   --pinned-app-color: #444444;
@@ -11,83 +8,49 @@
   --glow-size-multiplier: 2.5;
 }
 
-// .mouse-effect__wrapper {
-//   --before-bg-x: 0;
-//   --before-bg-y: 0;
-//   --pinned-app-height: 100px;
-//   --pinned-app-width: 100px;
-//   --glow-size-multiplier: 2.5;
-//   --pinned-app-color: #444444;
+@mixin mouse-effect__wrapper($width, $height, $padding: 4px, $glow-multiplier: 2.5) {
+  position: relative;
 
-//   &::before {
-//     content: "";
-//     position: absolute;
+  $size: max(#{$width}, #{$height});
 
-//     height: calc(100% - 4px);
-//     width: calc(100% - 4px);
+  // outline: var(--inspect);
 
-//     transform: translate(2px, 2px);
-//     z-index: 1;
-//   }
+  mix-blend-mode: lighten;
 
-//   &::after {
-//     content: "";
-//     position: absolute;
-
-//     width: 100%;
-//     aspect-ratio: 1;
-
-//     background: radial-gradient(rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 50%);
-//     background-position-x: calc(var(--before-bg-x) - (var(--pinned-app-width) * var(--glow-size-multiplier)/(2)));
-//     background-position-y: calc(var(--before-bg-y) - (var(--pinned-app-height) * var(--glow-size-multiplier)/(2)));
-//     background-repeat: no-repeat;
-//     background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
-//   }
-
-//   &:hover {
-//     &::after {
-//       box-sizing: border-box;
-//       border: 2px solid rgba(255, 255, 255, .6);
-//       background-image: radial-gradient(rgba(255, 255, 255, .4) -75%, rgba(255, 255, 255, 0) 75%);
-//     }
-
-//     &::before {
-//       background-color: transparent;
-//     }
-//   }
-// }
-
-@mixin mouse-effect__wrapper($width, $height) {
   &::before {
     content: "";
     position: absolute;
+    left: 0;
+    top: 0;
 
-    height: calc(100% - 4px);
-    width: calc(100% - 4px);
+    height: calc(#{$height} - #{$padding});
+    width: calc(#{$width} - #{$padding});
 
-    transform: translate(2px, 2px);
-    z-index: 1;
+    transform: translate(#{$padding/2}, #{$padding/2});
+    z-index: -1;
   }
 
   &::after { // border
+
     content: "";
     position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -2;
 
-    width: 100%;
-    aspect-ratio: 1;
+    width: $size;
+    height: $size;
 
     background: radial-gradient(rgba(255, 255, 255, .4) 0%, rgba(255, 255, 255, 0) 40%);
-    background-position-x: calc(var(--before-bg-x) - (#{$width} * var(--glow-size-multiplier)/(2)));
-    background-position-y: calc(var(--before-bg-y) - (#{$height} * var(--glow-size-multiplier)/(2)));
+    background-position-x: calc(var(--before-bg-x) - (#{$size} * #{$glow-multiplier}/(2)));
+    background-position-y: calc(var(--before-bg-y) - (#{$size} * #{$glow-multiplier}/(2)));
     background-repeat: no-repeat;
-    background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
+    background-size: calc(100% * #{$glow-multiplier}) calc(100% * #{$glow-multiplier});
   }
 
   &:hover {
     &::after { // background
-      box-sizing: border-box;
-      border: 2px solid rgba(255, 255, 255, .6);
-      background-image: radial-gradient(rgba(255, 255, 255, .4) -75%, rgba(255, 255, 255, 0) 75%);
+      background-image: radial-gradient(rgba(255, 255, 255, .3) -65%, rgba(255, 255, 255, 0) 80%);
     }
 
     &::before {
@@ -162,6 +125,7 @@
   transition: all 0s ease-in, width var(--trans) ease-in, background-color 0s ease-in, backdrop-filter 0s ease-in;
   transition-delay: 0s, 0s, var(--trans), var(--trans);
   filter: drop-shadow(4px 0px 3px rgba(0,0,0,.3));
+  z-index: 10;
 
   &:hover {
     backdrop-filter: blur(18px);
@@ -176,6 +140,8 @@
     text-transform: capitalize;
     display: flex;
     align-items: center;
+
+    @include mouse-effect__wrapper(100%, 100%);
 
     img {
       width: 48px;
@@ -211,46 +177,67 @@
     margin-right: 15px;
   }
 
-  .category__title {
-    padding: 13px 10px 7px;
-    outline: var(--inspect);
-    overflow: hidden;
-    
-    &:hover{
-      background: linear-gradient(to left,  rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, 0) 100%);
-      background-position-x: calc(var(--mouse-x) - (var(--mouse-w)));
-      background-color: rgba(255, 255, 255, .1);
-      background-repeat: no-repeat;
-      background-size: calc(var(--mouse-w) * 2);
-    }
+}
+
+.category__title {
+  padding: 13px 10px 7px;
+  // outline: var(--inspect);
+  overflow: hidden;
+
+  @include mouse-effect__wrapper(var(--box-width), var(--box-height), 2px);
+  
+  &::before {
+    background-image: none;
+  }
+
+  &::after{
+    background-image: none;
   }
   
-  .app-item {
-    display: flex;
-    align-items: center;
+  &:hover{
+    &::before {
+      width: calc(var(--box-width) - 2px);
+      height: calc(var(--box-height) - 2px);
 
-    &:hover {
-      // color: #FFF;
-      background: linear-gradient(to left,  rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, .25) 50%, rgba(255, 255, 255, 0) 90%);
-      background-position-x: calc(var(--mouse-x) - (var(--mouse-w)));
-      background-clip: padding-box; /* !importanté */
-      // border: solid 10px transparent; /* !importanté */
-      // border-image: linear-gradient(to right, rgba(255, 255, 255, .3), rgba(255,255, 255, 0)) 100% 0;
+      background-image: linear-gradient(to left, rgba(200, 200, 200, 0) 0%, rgba(100, 100, 100, .8) 40%, rgba(255, 255, 255, 0) 100%);
+      background-position-x: calc(var(--before-bg-x) - (var(--box-width) * var(--glow-size-multiplier)/(2)));
+      // background-position-y: calc(var(--before-bg-y) - (var(--box-height) * var(--glow-size-multiplier)/(2)));
       background-repeat: no-repeat;
-      background-size: calc(var(--mouse-w) * 2);
+      background-size: calc(100% * var(--glow-size-multiplier)) calc(100% * var(--glow-size-multiplier));
+      // background-color: blue;
     }
 
-    img {
-      width: 26px;
-      height: 26px;
-      padding: 3px;
-      margin: 2px 3px;
-      background-color: #0078d7;
+    &::after {
+      background-image: radial-gradient(rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 40%);
     }
+  }
+}
 
-    .title {
-      padding-left: 5px;
-    }
+.app-item {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    // color: #FFF;
+    // background: linear-gradient(to left,  rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, .25) 50%, rgba(255, 255, 255, 0) 90%);
+    background-position-x: calc(var(--mouse-x) - (var(--mouse-w)));
+    background-clip: padding-box; /* !importanté */
+    // border: solid 10px transparent; /* !importanté */
+    // border-image: linear-gradient(to right, rgba(255, 255, 255, .3), rgba(255,255, 255, 0)) 100% 0;
+    background-repeat: no-repeat;
+    background-size: calc(var(--mouse-w) * 2);
+  }
+
+  .icon {
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    margin: 2px 3px;
+    // background-color: #0078d7;
+  }
+
+  .title {
+    padding-left: 5px;
   }
 }
 
@@ -266,9 +253,22 @@
   width: var(--pinned-app-width);
   height: var(--pinned-app-height);
 
-  position: relative;
+  display: grid;
+  align-items: center;
+  justify-items: center;
   
   background-color: var(--pinned-app-color);
+
+  .icon {
+    width: calc(var(--pinned-app-width) / 3);
+    filter: drop-shadow(0px 0.5px 2px rgba(0, 0, 0, 0.2)) drop-shadow(0px 3.2px 7.2px rgba(0, 0, 0, 0.24));
+  }
+
+  .title {
+    position: absolute;
+    left: 8px;
+    bottom: 5px;
+  }
 
   &::before {
     background-color: var(--pinned-app-color);

@@ -5,6 +5,8 @@ const AppListCategory = ({ category }) => {
 	const app = useRef(null);
 	const cssVariables = useCssVariables({ app });
 
+	// console.log(cssVariables["--box-height"]);
+
 	return (
 		<>
 			<div
@@ -17,14 +19,13 @@ const AppListCategory = ({ category }) => {
 
 			{category.children.map((app) => (
 				<div
-					className="app-category app-item"
+					className="app-item"
 					key={app.name}
-					ref={app}
-					style={cssVariables}>
-					<div className="content title">
-						<img src={app.imgSrc} alt={`${app.name} icon`} />
-						{` ${app.name}`}
-					</div>
+					// // ref={app}
+					// // style={cssVariables}
+				>
+					<img className="icon" src={app.imgSrc} alt={`${app.name} icon`} />
+					<div className="content title">{` ${app.name}`}</div>
 				</div>
 			))}
 		</>

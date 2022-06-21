@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@system32/*": [
+        "src/libraries/system32/*"
+      ]
+    }
+  }
+}
