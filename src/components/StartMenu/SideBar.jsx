@@ -1,7 +1,19 @@
+import { useRef } from "react";
+import { useCssVariables } from "../../hooks/useCssVariables";
+
 const ActionButton = (props) => {
+	const app = useRef(null);
+	const cssVariables = useCssVariables({ app });
+
 	return (
-		<div className={`action-button ${props.name}`}>
-			<img src="https://img.icons8.com/ios-glyphs/30/000000/windows-10.png" alt="ico" />
+		<div
+			className={`action-button ${props.name}`}
+			ref={app}
+			style={cssVariables}>
+			<img
+				src="https://img.icons8.com/ios-glyphs/30/000000/windows-10.png"
+				alt="ico"
+			/>
 			{props.name}
 		</div>
 	);
